@@ -1,0 +1,41 @@
+server:
+  port: 3344
+spring:
+  application:
+    name: cloud-config-center # 注册进 eureka 服务器的微服务名
+  cloud:
+    config:
+      server:
+        git:
+          uri: https://github.com/zzc0101/springcloud-config.git
+          #### 搜索目录
+          search-paths:
+            - springcloud-config
+          username: zzc0101
+          password: zzc2580,.
+      #### 读取分支
+      label: main
+      #### 读取服务名
+#      name:
+      #### 读取环境
+#      profile:
+
+# rabbitMQ 配置 该配置需要放在 eureka 上面
+rabbitmq:
+  host: localhost
+  port: 5672
+  username: guest
+  password: guest
+
+# rabbitMQ 相关配置，暴露 bus 刷新配置的端点
+management:
+  endpoints:
+    web:
+      exposure:
+        include: "bus-refresh"
+
+# 服务注册到 eureka 地址
+eureka:
+  client:
+    service-url:
+      defaultZone: http://localhost:7001/eureka
