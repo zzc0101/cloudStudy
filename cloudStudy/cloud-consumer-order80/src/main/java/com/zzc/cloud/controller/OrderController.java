@@ -70,4 +70,12 @@ public class OrderController {
         URI uri = serviceInstance.getUri();
         return restTemplate.getForObject(uri + "/payment/lb", String.class);
     }
+
+    @GetMapping("/consumer/payment/zipkin")
+    public String paymentZipKin() {
+        String result = restTemplate.getForObject(PAYMENT_SRV + "payment/zipkin/", String.class);
+        return result;
+    }
+
+
 }
